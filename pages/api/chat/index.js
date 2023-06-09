@@ -1,4 +1,4 @@
-async function query(data) {
+export default async function query(data) {
     const response = await fetch(
         "https://flowisechatbot.onrender.com/api/v1/prediction/7fd4ef79-01aa-4a55-ac1c-e422e680f361",
         {
