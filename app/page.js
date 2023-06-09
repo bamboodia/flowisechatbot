@@ -1,17 +1,20 @@
+"use client";
 import Image from "next/image";
+import { useState } from "react";
 
 export default function Home() {
+
 	const [streamedData, setStreamedData] = useState("");
 
 	const handleChatSubmit = async (e) => {
 		e.preventDefault();
 		setStreamedData("");
 		const formData = new FormData(e.currentTarget);
+    console.log({ question: formData.get("prompt") });
 		const response = await fetch("api/chat", {
-			method: "POST",
-			body: JSON.stringify({ prompt: formData.get("prompt") }),
-			headers: { "Content-Type": "application/json" },
+			question: formData.get("prompt"),
 		});
+    console.log(response);
 		const reader = response.body.getReader();
 
 		while (true) {
@@ -61,5 +64,7 @@ export default function Home() {
 				)}
 			</div>
 		</main>
+    
 	);
+  
 }
