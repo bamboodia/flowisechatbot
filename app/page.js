@@ -21,8 +21,8 @@ export default function Home() {
 		e.preventDefault();
 		setStreamedData("");
 		const formData = new FormData(e.currentTarget);
-		console.log({ question: formData.get("prompt") });
-		const response = await query({ question: formData.get("prompt") })
+		const question = { question: formData.get("prompt") };
+		const response = await query(question);
 		console.log(response);
 		const reader = response.body.getReader();
 
