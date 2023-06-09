@@ -10,7 +10,7 @@ export default function Home() {
 			"https://flowisechatbot.onrender.com/api/v1/prediction/7fd4ef79-01aa-4a55-ac1c-e422e680f361",
 			{
 				method: "POST",
-				body: {"question": "Hey, how are you?"},
+				body: data,
 			}
 		);
 		const result = await response.json();
@@ -22,7 +22,10 @@ export default function Home() {
 		setStreamedData("");
 		const formData = new FormData(e.currentTarget);
 		const question = { question: formData.get("prompt") };
-		const response = await query(question);
+		//const response = await query(question);
+		query({"question": "Hey, how are you?"}).then((response) => {
+			console.log(response);
+		});
 		console.log(response);
 		const reader = response.body.getReader();
 
