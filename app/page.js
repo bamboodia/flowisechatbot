@@ -3,18 +3,27 @@ import Image from "next/image";
 import { useState } from "react";
 
 export default function Home() {
-
 	const [streamedData, setStreamedData] = useState("");
+
+	const query = async (data) => {
+		const response = await fetch(
+			"https://flowisechatbot.onrender.com/api/v1/prediction/7fd4ef79-01aa-4a55-ac1c-e422e680f361",
+			{
+				method: "POST",
+				body: data,
+			}
+		);
+		const result = await response.json();
+		return result;
+	};
 
 	const handleChatSubmit = async (e) => {
 		e.preventDefault();
 		setStreamedData("");
 		const formData = new FormData(e.currentTarget);
-    console.log({ question: formData.get("prompt") });
-		const response = await fetch("api/chat", {
-			question: formData.get("prompt"),
-		});
-    console.log(response);
+		console.log({ question: formData.get("prompt") });
+		const response = await query({ question: formData.get("prompt") })
+		console.log(response);
 		const reader = response.body.getReader();
 
 		while (true) {
@@ -64,7 +73,5 @@ export default function Home() {
 				)}
 			</div>
 		</main>
-    
 	);
-  
 }
