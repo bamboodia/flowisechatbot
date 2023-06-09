@@ -10,7 +10,7 @@ export default function Home() {
 			"https://flowisechatbot.onrender.com/api/v1/prediction/7fd4ef79-01aa-4a55-ac1c-e422e680f361",
 			{
 				method: "POST",
-				body: data,
+				body: {"question": "Hey, how are you?"},
 			}
 		);
 		const result = await response.json();
