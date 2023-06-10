@@ -7,10 +7,11 @@ export default function Home() {
 
 	const query = async (data) => {
 		const response = await fetch(
-			"https://flowisechatbot.onrender.com/api/v1/prediction/7fd4ef79-01aa-4a55-ac1c-e422e680f361",
+			"https://flowisechatbot.onrender.com/api/v1/prediction/9b297a69-7837-4e83-b104-949358061c9b",
 			{
+				headers: { Authorization: "Bearer t+LhuXKKRdfG9YCk86nvb1IIFPxPfqdnq3HEW//nfsc=" },
 				method: "POST",
-				body: data,
+				body: data
 			}
 		);
 		const result = await response.json();
@@ -22,10 +23,7 @@ export default function Home() {
 		setStreamedData("");
 		const formData = new FormData(e.currentTarget);
 		const question = { question: formData.get("prompt") };
-		//const response = await query(question);
-		query({"question": "Hey, how are you?"}).then((response) => {
-			console.log(response);
-		});
+		const response = await query(question);
 		console.log(response);
 		const reader = response.body.getReader();
 
